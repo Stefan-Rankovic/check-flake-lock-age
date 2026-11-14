@@ -11,6 +11,7 @@
         {
             lib,
             pkgs,
+            self',
             ...
         }:
         let
@@ -38,6 +39,10 @@
                     pname = name;
                 }
             );
+            devShells.default = craneLib.devShell {
+                inherit (self') checks;
+                inputsFrom = [ self'.packages.default ];
+            };
             packages.default = craneLib.buildPackage (
                 commonArgs
                 // {
