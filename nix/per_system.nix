@@ -8,10 +8,19 @@
 
 {
     perSystem =
-        { pkgs, ... }:
+        {
+            lib,
+            pkgs,
+            ...
+        }:
         let
             cargoTomlContents = fromTOML (builtins.readFile ../Cargo.toml);
-            inherit (cargoTomlContents.package) name version;
+            inherit (cargoTomlContents.package)
+                description
+                name
+                repository
+                version
+                ;
 
             craneLib = inputs.crane.mkLib pkgs;
             commonArgs = {
@@ -33,6 +42,13 @@
                 commonArgs
                 // {
                     inherit cargoArtifacts;
+                    meta = {
+                        inherit description;
+                        broken = false;
+                        homepage = repository;
+                        license = lib.licenses.gpl3Plus;
+                        mainProgram = name;
+                    };
                     pname = name;
                 }
             );

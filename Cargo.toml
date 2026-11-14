@@ -5,6 +5,7 @@
 description = "Warns if the flake.lock file in the current directory was last modified too long ago."
 edition     = "2024"
 name        = "check-flake-lock-age"
+repository  = "https://github.com/Stefan-Rankovic/check-flake-lock-age"
 version     = "1.0.0"
 
 [dependencies]
