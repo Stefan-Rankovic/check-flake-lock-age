@@ -37,6 +37,7 @@
                 // {
                     inherit cargoArtifacts;
                     pname = name;
+                    cargoClippyExtraArgs = "--all-targets -- --deny warnings";
                 }
             );
             devShells.default = craneLib.devShell {
